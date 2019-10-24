@@ -17,6 +17,6 @@ jobs:
       uses: actions/checkout@v1
 
     - name: List files
-      run: cd ./.. & ls
+      run: cd ./../gozip & ls
     - name: Test
       run: go test ./.. 
