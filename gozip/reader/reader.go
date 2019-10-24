@@ -60,3 +60,7 @@ func (r *Reader) Files() []*zip.File {
 
 	return r.zip_reader.File
 }
+
+func (r *Reader) Close(){
+	r.zip_reader.Close()
+}

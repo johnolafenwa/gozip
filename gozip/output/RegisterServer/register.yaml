@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deepstack-register-1
+  labels:
+    app-type: register
+
+spec:
+  containers:
+    - image: johnolafenwa/prototwo:deepstack-register
+      name: deepstack-register
+      ports:
+        - containerPort: 80

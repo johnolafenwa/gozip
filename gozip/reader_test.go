@@ -11,7 +11,7 @@ func TestReader(t *testing.T) {
 	read, err := reader.New("output.zip")
 
 	if err != nil {
-		t.Errorf("The following error occured %v", err)
+		t.Errorf("%v", err)
 
 		return
 	}
@@ -19,7 +19,7 @@ func TestReader(t *testing.T) {
 	err = read.ExtractTo("output")
 
 	if err != nil {
-		t.Errorf("The following error occured %v", err)
+		t.Errorf("%v", err)
 
 	}
 

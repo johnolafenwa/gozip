@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: endgamebalancer2
+spec:
+  type: LoadBalancer
+  selector:
+    app: endgame 
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: endgamedeployment2
+spec:
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: endgame
+    spec:
+      containers:
+        - name: endgamecontainer
+          image: localhost:32000/endgamereview:v4
+          ports:
+            - containerPort: 5000
+              protocol: TCP

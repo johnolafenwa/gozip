@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deepstack-register
+
+spec:
+  replicas: 8
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 3
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: deepstack-register
+    spec:
+      containers:
+        - image: johnolafenwa/prototwo:deepstack-register
+          name: deepstack-register
+          ports:
+            - containerPort: 80
