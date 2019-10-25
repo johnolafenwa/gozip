@@ -8,21 +8,30 @@ import (
 
 func TestWriter(t *testing.T) {
 
-	writer, err := writer.New("output.zip")
+	writer, err := writer.New("test.zip")
 
 	if err != nil {
-		t.Errorf("The following error occured %f", err)
-	}
-	err = writer.AddFile("Cat03.jpg", "Cat03.jpg")
-	if err != nil {
-		t.Errorf("The following error occured %f", err)
-	}
-	err = writer.AddFile("Figure_2.png", "Figure_2.png")
-	if err != nil {
-		t.Errorf("The following error occured %f", err)
+		t.Errorf("%v", err)
+		return
 	}
 
-	writer.AddFolder("/home/johnolafenwa/Documents/Kubernetes", "")
+	if err != nil {
+		t.Errorf("%v", err)
+	}
+	err = writer.AddFile("walk.jpg", "walk.jpg")
+	if err != nil {
+		t.Errorf("%v", err)
+	}
+	err = writer.AddFile("jaguar.jpg", "jaguar.jpg")
+	if err != nil {
+		t.Errorf("%v", err)
+	}
+
+	err = writer.AddFolder("../testfiles/Pictures", "Pictures")
+
+	if err != nil {
+		t.Errorf("%v", err)
+	}
 
 	writer.Save()
 
