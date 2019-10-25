@@ -18,11 +18,11 @@ func TestWriter(t *testing.T) {
 	if err != nil {
 		t.Errorf("%v", err)
 	}
-	err = writer.AddFile("walk.jpg", "walk.jpg")
+	err = writer.AddFile("../testfiles/walk.jpg", "walk.jpg")
 	if err != nil {
 		t.Errorf("%v", err)
 	}
-	err = writer.AddFile("jaguar.jpg", "jaguar.jpg")
+	err = writer.AddFile("../testfiles/jaguar.jpg", "jaguar.jpg")
 	if err != nil {
 		t.Errorf("%v", err)
 	}
