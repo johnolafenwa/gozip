@@ -27,13 +27,19 @@ func (r *Reader) ExtractTo(dest string) error {
 
 	for _, file := range r.zip_reader.File {
 
+		filePath := path.Join(dest, file.Name)
+
+		if file.FileInfo().IsDir() {
+			os.MkdirAll(filePath, file.FileInfo().Mode().Perm())
+
+			continue
+		}
+
 		data, err := file.Open()
 
 		if err != nil {
 			return err
 		}
-
-		filePath := path.Join(dest, file.Name)
 
 		err = os.MkdirAll(filepath.Dir(filePath), os.ModePerm)
 
@@ -61,6 +67,6 @@ func (r *Reader) Files() []*zip.File {
 	return r.zip_reader.File
 }
 
-func (r *Reader) Close(){
+func (r *Reader) Close() {
 	r.zip_reader.Close()
 }
