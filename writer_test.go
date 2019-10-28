@@ -27,7 +27,7 @@ func TestWriter(t *testing.T) {
 		t.Errorf("%v", err)
 	}
 
-	err = writer.AddFolder("../testfiles/Pictures", "")
+	err = writer.AddFolder("testfiles/Pictures", "")
 
 	if err != nil {
 		t.Errorf("%v", err)
