@@ -8,7 +8,7 @@ import (
 
 func TestReader(t *testing.T) {
 
-	read, err := reader.New("../testfiles/Images.zip")
+	read, err := reader.New("testfiles/Images.zip")
 
 	if err != nil {
 		t.Errorf("%v", err)
