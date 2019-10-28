@@ -2,11 +2,11 @@ package writer
 
 import (
 	"archive/zip"
-	"fmt"
 	"io"
 	"os"
 	"path"
 	"path/filepath"
+	"strings"
 )
 
 const Store uint16 = 0
@@ -40,6 +40,7 @@ func (w *Writer) SetMethod(method uint16) {
 func (w *Writer) AddFile(source string, name string) error {
 
 	file, err := os.Open(source)
+
 	defer file.Close()
 
 	if err != nil {
@@ -58,7 +59,13 @@ func (w *Writer) AddFile(source string, name string) error {
 		return err
 	}
 
-	zip_header.Name = name
+	if strings.TrimSpace(name) == "" {
+
+		zip_header.Name = file_info.Name()
+
+	} else {
+		zip_header.Name = name
+	}
 	zip_header.Method = w.method
 
 	writer, err := w.zip_writer.CreateHeader(zip_header)
@@ -73,13 +80,16 @@ func (w *Writer) AddFile(source string, name string) error {
 
 func (w *Writer) AddFolder(source string, name string) error {
 
+	if strings.TrimSpace(name) == "" {
+		name = filepath.Base(source)
+	}
+
 	err := filepath.Walk(source,
 		func(fpath string, info os.FileInfo, err error) error {
 
 			newPath := path.Join(name, fpath[len(source):])
 
 			if err != nil {
-				fmt.Println(err)
 				return err
 			}
 
