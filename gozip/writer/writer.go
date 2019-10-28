@@ -9,7 +9,10 @@ import (
 	"strings"
 )
 
+//Store mode archives files but does not compress them
 const Store uint16 = 0
+
+//Deflate mode compresses archived files
 const Deflate uint16 = 8
 
 type Writer struct {
@@ -19,6 +22,7 @@ type Writer struct {
 	output_file *os.File
 }
 
+//New eturns an instance of the Writer, the filename is used to create the resulting zip file
 func New(filename string) (*Writer, error) {
 
 	zip_file, err := os.Create(filename)
@@ -31,12 +35,15 @@ func New(filename string) (*Writer, error) {
 
 }
 
+//SetMethod sets the method to be used for compression. This can Store or Deflate from Writer constants
 func (w *Writer) SetMethod(method uint16) {
 
 	w.method = method
 
 }
 
+//AddFile creates a new file entry in the zip archive. source specifies an existing file to read contents from. The name is the path name of the file
+//in the archive. Note that if name is an empty string, the filename from source will be used and the file will be created in the root path.
 func (w *Writer) AddFile(source string, name string) error {
 
 	file, err := os.Open(source)
@@ -78,6 +85,9 @@ func (w *Writer) AddFile(source string, name string) error {
 	return err
 }
 
+//AddFolder creates a new folder entry int the archive and recursively adds all files within the folder. The file structure of the folder
+//is preserved. The name property is used to name the folder path, however, if the name is empty, the folder name will be inferred from
+//the source path and the folder will be stored in the root directory.
 func (w *Writer) AddFolder(source string, name string) error {
 
 	if strings.TrimSpace(name) == "" {
@@ -106,6 +116,7 @@ func (w *Writer) AddFolder(source string, name string) error {
 
 }
 
+//Save closes the underlying zip file and zip writer
 func (w *Writer) Save() {
 
 	w.zip_writer.Close()
