@@ -78,7 +78,7 @@ func main(){
 </pre>
 
 # Modes
-The writer supports two modes for woriting zip archives; Store and Deflate. If you want the files compressed, use Store.
+The writer supports two modes for writing zip archives; Store and Deflate. If you want the files compressed, use Store.
 
 <pre>
 
