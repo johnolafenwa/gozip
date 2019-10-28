@@ -19,11 +19,11 @@ import "github.com/johnolafenwa/gozip/writer"
 
 func main(){
 
-    writer,_ := writer.New("Output.zip")
+    zipWriter,_ := writer.New("Output.zip")
   
-    writer.AddFolder("path-to-folder","")
+    zipWriter.AddFolder("path-to-folder","")
     
-    writer.Save()
+    zipWriter.Save()
 
 }
 </pre>
@@ -36,11 +36,11 @@ import "github.com/johnolafenwa/gozip/reader"
 
 func main(){
 
-    reader, _ := reader.New("path-to-zip-file")
+    zipReader, _ := reader.New("path-to-zip-file")
     
-    reader.ExtractTo("Destination-Path")
-    
-    reader.Close()
+    zipReader.ExtractTo("Destination-Path")
+   
+    zipReader.Close()
   
 }
 
@@ -58,21 +58,32 @@ import "github.com/johnolafenwa/gozip/writer"
 
 func main(){
 
-    writer,_ := writer.New("MyFiles.zip")
+    zipWriter,_ := writer.New("MyFiles.zip")
     
     //add a single file
-    writer.AddFile("path-to-file/file1.txt","file1.txt")
+    zipWriter.AddFile("path-to-file/file1.txt","file1.txt")
     
     //add a single file, infer name from path
-    writer.AddFile("path-to-file/file2.txt","")
+    zipWriter.AddFile("path-to-file/file2.txt","")
     
     //add a folder
-    writer.AddFolder("path-to-folder/FolderOne","FolderOne")
+    zipWriter.AddFolder("path-to-folder/FolderOne","FolderOne")
     
     //add a folder, infer name from path
-    writer.AddFolder("path-to-folder/FolderTwo","")
+    zipWriter.AddFolder("path-to-folder/FolderTwo","")
     
-    writer.Save()
+    zipWriter.Save()
 
 }
 </pre>
+
+# Modes
+The writer supports two modes for woriting zip archives; Store and Deflate. If you want the files compressed, use Store.
+
+<pre>
+
+zipWriter,_ := writer.New("MyFiles.zip")
+zipWriter.SetMethod(writer.Deflate)
+
+</pre>
+
