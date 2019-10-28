@@ -1,6 +1,9 @@
 # GoZip
 An easy to use Go Library for creating and extracting compressed files
 
+![Build Status](https://github.com/johnolafenwa/gozip/workflows/Go/badge.svg "Build Status")
+
+
 # Installation:
 <pre>
 go get github.com/johnolafenwa/gozip
@@ -18,7 +21,7 @@ func main(){
 
     writer,_ := writer.New("Output.zip")
   
-    writer.AddFolder("path-to-folder")
+    writer.AddFolder("path-to-folder","")
     
     writer.Save()
 
